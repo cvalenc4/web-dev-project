@@ -1,20 +1,19 @@
 import React from 'react';
 
-// Need to make images be of the same size to align each product
 const ProductCard = ({ product }) => {
   return (
-    <a href="#" className="group">
+    <a href="#" className="group"> {/* Thinking about making indivdual cards that will be linked to */}
       <div
-        className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7"
+        className="w-64 h-64 overflow-hidden rounded-lg"
       >
         <img
-          src={product.image}
-          alt={product.description}
-          className="h-full w-full object-cover object-center group-hover:opacity-75"
+          src={product.get("image")}
+          alt={product.get("name")}
+          className="w-full h-full object-contain mx-auto group-hover:opacity-75"
         />
       </div>
-      <h3 className="mt-4 text-sm text-gray-700">{product.title}</h3>
-      <p className="mt-1 text-lg font-medium text-gray-900">${product.price}</p>
+      <h3 className="mt-4 text-sm text-gray-700">{product.get("name")}</h3>
+      <p className="mt-1 text-lg font-medium text-gray-900">${}</p>
     </a>
   );
 };

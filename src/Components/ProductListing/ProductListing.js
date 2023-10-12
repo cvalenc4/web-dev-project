@@ -10,6 +10,7 @@ const ProductListing = () => {
 
   useEffect(() => {
     getAllProducts().then((products) => {
+      console.log(products);
       setProducts(products);
     });
   }, []);
