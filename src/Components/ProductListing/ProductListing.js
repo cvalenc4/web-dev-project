@@ -5,6 +5,8 @@ import Navbar from '../Navbar/Navbar.js';
 
 // Currently clicking on pictures keeps you on this page. In future, we want to redirect to a more detailed product card
 
+// We are wanting to edit the style in the future
+
 const ProductListing = () => {
   const [products, setProducts] = useState([]);
 

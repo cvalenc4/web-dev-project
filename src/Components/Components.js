@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import ProductListing from './ProductListing/ProductListing.js';
 import About from './About/About.js';
 
+// Currently only have 2 pages, and would like to add more in the future
 export default function Components() {
     return (
         <Router>

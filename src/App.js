@@ -8,13 +8,6 @@ Parse.serverURL = Env.SERVER_URL;
 
 function App() {
   return <Components />
-  /*
-  return (
-    <div className="App">
-      <ProductListing />
-    </div>
-  );
-  */
 }
 
 export default App;
