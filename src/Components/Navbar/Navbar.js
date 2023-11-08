@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useNavigate } from "react-router-dom";
+import { logoutUser } from "../../Common/Services/Auth/AuthService.js";
 
 // TODO:
 // The search bar needs to have responsive design to be smaller when window screen is small
@@ -8,10 +10,19 @@ import React, { useState } from 'react';
 // Have buttons redirect to actual pages we create in future
 
 const Navbar = () => {
+  const navigate = useNavigate();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  const handleSignOut = () => {
+    logoutUser().then((isLoggedOut) => {
+      if (isLoggedOut === false) {
+        navigate('/auth/login', { replace: true });
+      }
+    });
   };
 
   return (
@@ -143,7 +154,8 @@ const Navbar = () => {
                     Settings
                     </a>
                     <a
-                    href="#"
+                    href="/auth/login"
+                    onClick={handleSignOut}
                     className="block px-4 py-2 text-sm text-gray-700"
                     role="menuitem"
                     tabIndex="-1"
