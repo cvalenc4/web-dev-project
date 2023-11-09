@@ -16,3 +16,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Made Product Images level with each other
 
 ### Fixed
+
+## [0.3.0] - 2023-11-08
+
+### Added
+- Added Login Page
+- Added Register Page
+- Added Authentication
+- Added protected routes
+- Signout button is now functional
