@@ -19,15 +19,17 @@ export default function Components() {
                 <Route path="/about" element={<About />} />
                 <Route path="/auth/login" element={user ? <Navigate to="/" /> : <AuthLogin />} />
                 <Route path="/auth/register" element={user ? <Navigate to="/auth/login" /> : <AuthRegister />} />
+                <Route path="/shop" element={<ProductListing />} />
                 <Route path="*" element={<Navigate to="/auth/login" replace />} />
-                <Route 
+                
+                {/* <Route 
                     path="/shop"
                     element={
                         <ProtectedRoute>
                             <ProductListing />
                         </ProtectedRoute>
                     }
-                />
+                /> */}
             </Routes>
         </Router>
     )
