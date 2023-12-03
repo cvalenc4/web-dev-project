@@ -19,8 +19,7 @@ const AuthRegister = () => {
   // redirect already authenticated users back to home
   useEffect(() => {
     if (checkUser()) {
-      alert("You are already logged in");
-      navigate("/");
+      navigate("/shop");
     }
   }, [navigate]);
 
@@ -30,10 +29,7 @@ const AuthRegister = () => {
     if (newUser && add) {
       createUser(newUser).then((userCreated) => {
         if (userCreated) {
-          alert(
-            `${userCreated.get("firstName")}, you successfully registered!`
-          );
-          navigate("/");
+          navigate("/shop");
         }
         // TODO: redirect user to main app
         setAdd(false);

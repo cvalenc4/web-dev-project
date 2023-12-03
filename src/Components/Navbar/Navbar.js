@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
-import { logoutUser } from "../../Common/Services/Auth/AuthService.js";
+import { checkUser, logoutUser } from "../../Common/Services/Auth/AuthService.js";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -8,6 +8,14 @@ const Navbar = () => {
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  const handleCartClick = () => {
+    if (!checkUser()) {
+      navigate('/auth/login');
+    } else {
+      // Logic to go to the cart page
+    }
   };
 
   const handleSignOut = () => {
@@ -45,9 +53,9 @@ const Navbar = () => {
             <a href="/about" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">About</a>
 
             {/* Shopping Cart Button */}
-            {/* Shopping Cart Button */}
             <button
               type="button"
+              onClick={handleCartClick}
               className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white flex items-center justify-center"
             >
               <span className="sr-only">View cart</span>
