@@ -41,8 +41,8 @@ const Navbar = () => {
           <div className="flex items-center space-x-4">
             {/* Navigation Links */}
             <a href="/" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Home</a>
-            <a href="/about" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">About</a>
             <a href="/shop" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Shop</a>
+            <a href="/about" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">About</a>
 
             {/* Shopping Cart Button */}
             {/* Shopping Cart Button */}
@@ -84,7 +84,7 @@ const Navbar = () => {
                     aria-labelledby="user-menu-button"
                     tabIndex="-1"
                 >
-                    <a
+                    {/* <a
                     href="#"
                     className="block px-4 py-2 text-sm text-gray-700"
                     role="menuitem"
@@ -101,7 +101,7 @@ const Navbar = () => {
                     id="user-menu-item-1"
                     >
                     Settings
-                    </a>
+                    </a> */}
                     <a
                     href="/auth/login"
                     onClick={handleSignOut}
