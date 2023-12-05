@@ -1,6 +1,8 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { checkUser } from '../../Common/Services/Auth/AuthService';
+import { addToCart } from '../../Common/Services/cartServices';
+import { getCurrentUser } from '../../Common/Services/Auth/AuthService.js';
 
 const ProductCard = ({ product }) => {
   const navigate = useNavigate();
@@ -8,7 +10,16 @@ const ProductCard = ({ product }) => {
     if (!checkUser()) {
       navigate('/auth/login');
     } else {
-      // Logic to add the product to the cart
+      console.log('Adding product to cart');
+      const user  = getCurrentUser();
+      addToCart(user, product, 1)
+        .then(() => {
+          console.log('Product added to cart');
+          // Optionally, navigate to the cart page or show a confirmation
+        })
+        .catch(error => {
+          console.error('Error adding to cart:', error);
+        });
     }
   };
 
