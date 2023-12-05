@@ -6,6 +6,7 @@ import AuthLogin from '../Common/Services/Auth/AuthLogin.js';
 import { getCurrentUser } from '../Common/Services/Auth/AuthService.js';
 import ProtectedRoute from "../Common/Services/ProtectedRoute.js";
 import Home from './Home/Home.js';
+import CartPage from './Cart/CartPage';
 
 // Currently only have 2 pages, and would like to add more in the future
 export default function Components() { 
@@ -21,15 +22,14 @@ export default function Components() {
                 <Route path="/auth/register" element={user ? <Navigate to="/auth/login" /> : <AuthRegister />} />
                 <Route path="/shop" element={<ProductListing />} />
                 <Route path="*" element={<Navigate to="/auth/login" replace />} />
-                
-                {/* <Route 
-                    path="/shop"
+                <Route 
+                    path="/cart"
                     element={
                         <ProtectedRoute>
-                            <ProductListing />
+                            <CartPage />
                         </ProtectedRoute>
                     }
-                /> */}
+                />
             </Routes>
         </Router>
     )

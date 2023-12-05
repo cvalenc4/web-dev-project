@@ -5,6 +5,7 @@ import { checkUser, logoutUser } from "../../Common/Services/Auth/AuthService.js
 const Navbar = () => {
   const navigate = useNavigate();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const test = checkUser();
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -14,7 +15,19 @@ const Navbar = () => {
     if (!checkUser()) {
       navigate('/auth/login');
     } else {
-      // Logic to go to the cart page
+      navigate('/cart');
+    }
+  };
+
+  const handleAuthAction = () => {
+    if (test) {
+      logoutUser().then((isLoggedOut) => {
+        if (isLoggedOut) {
+          navigate('/auth/login');
+        }
+      });
+    } else {
+      navigate('/auth/login');
     }
   };
 
@@ -92,34 +105,28 @@ const Navbar = () => {
                     aria-labelledby="user-menu-button"
                     tabIndex="-1"
                 >
-                    {/* <a
-                    href="#"
-                    className="block px-4 py-2 text-sm text-gray-700"
-                    role="menuitem"
-                    tabIndex="-1"
-                    id="user-menu-item-0"
-                    >
-                    Your Profile
-                    </a>
+                  {test ? (
                     <a
-                    href="#"
-                    className="block px-4 py-2 text-sm text-gray-700"
-                    role="menuitem"
-                    tabIndex="-1"
-                    id="user-menu-item-1"
+                      href="#"
+                      onClick={handleAuthAction}
+                      className="block px-4 py-2 text-sm text-gray-700"
+                      role="menuitem"
+                      tabIndex="-1"
+                      id="user-menu-item-2"
                     >
-                    Settings
-                    </a> */}
-                    <a
-                    href="/auth/login"
-                    onClick={handleSignOut}
-                    className="block px-4 py-2 text-sm text-gray-700"
-                    role="menuitem"
-                    tabIndex="-1"
-                    id="user-menu-item-2"
-                    >
-                    Sign out
+                      Sign out
                     </a>
+                  ) : (
+                    <a
+                      href="/auth/login"
+                      className="block px-4 py-2 text-sm text-gray-700"
+                      role="menuitem"
+                      tabIndex="-1"
+                      id="user-menu-item-2"
+                    >
+                      Sign in
+                    </a>
+                  )}
                 </div>
               )}
             </div>
