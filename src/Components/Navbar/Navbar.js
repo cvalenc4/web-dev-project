@@ -10,6 +10,10 @@ const Navbar = () => {
 
   const navigate = useNavigate();
   const test = checkUser();
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setSearchQuery(localSearch);
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
