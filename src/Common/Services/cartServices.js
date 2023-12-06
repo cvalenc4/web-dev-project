@@ -136,16 +136,3 @@ export const updateCartItemQuantity = (user, itemId, change) => {
     throw error;
   });
 };
-
-// Function to create a payment intent
-export const createPaymentIntent = async (cartItems) => {
-  const response = await fetch('/create-payment-intent', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ items: cartItems }),
-  });
-  const paymentIntent = await response.json();
-  return paymentIntent;
-};
