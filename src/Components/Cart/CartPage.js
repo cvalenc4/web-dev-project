@@ -15,6 +15,24 @@ const CartSummary = () => {
     }
   }, [user]);
 
+  const handleCheckout = async () => {
+    try {
+        const response = await fetch('http://localhost:3001/create-checkout-session', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ items: cartItems }),
+        });
+
+        const responseBody = await response.text(); // Get response body as text
+        const data = JSON.parse(responseBody); // Parse the response as JSON
+        window.location.href = data.url; // Redirect to Stripe Checkout
+    } catch (error) {
+        console.error("Error during checkout:", error);
+    }
+  };
+
   const handleRemoveItem = (itemId) => {
     removeFromCart(user, itemId).then(updatedCart => {
       setCartItems(updatedCart.get('items'));
@@ -32,8 +50,11 @@ const CartSummary = () => {
         setCartItems(updatedCart.get('items'));
     });
   };
-  
 
+  const priceToNumber = (price) => {
+    return parseFloat(price.replace(/[^\d.-]/g, ''));
+  }
+  
   return (
     <div class="bg-gray-100 min-h-screen">
         <Navbar />
@@ -53,15 +74,15 @@ const CartSummary = () => {
                         +
                     </button>
                     </div>
-                    <p className="text-right mt-2">Total Price: ${item.get('quantity') * item.get('product').get('price')}</p>
+                    <p className="text-right mt-2">Total Price: ${item.get('quantity') * priceToNumber(item.get('product').get('actual_price'))}</p>
                 </div>
                 <button onClick={() => handleRemoveItem(item.id)} className="ml-4">
                     <img src="https://icons-for-free.com/iconfiles/png/512/trash+bin+icon-1320086460670911435.png" alt="Remove" className="w-6 h-6" />
                 </button>
                 </div>
             ))}
-            <button className="w-full py-2 px-4 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-600">
-                Checkout
+            <button onClick={handleCheckout} className="w-full py-2 px-4 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-600">
+              Checkout
             </button>
         </div>
     </div>
