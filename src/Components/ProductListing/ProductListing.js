@@ -1,22 +1,34 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { getAllProducts } from '../../Common/Services/Products.js';
 import ProductCard from './ProductCard.js';
 import Navbar from '../Navbar/Navbar.js';
+import { SearchContext } from '../../SearchContext.js';
 
 // Currently clicking on pictures keeps you on this page. In future, we want to redirect to a more detailed product card
 
 // We are wanting to edit the style in the future
 
 const ProductListing = () => {
+
+  const { searchQuery } = useContext(SearchContext);
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    getAllProducts().then((products) => {
-      console.log(products);
-      setProducts(products);
-    });
-  }, []);
-
+    const fetchProducts = async () => {
+      if ( searchQuery ) {
+        // filter products based on search query
+        const filteredProducts = await getAllProducts(searchQuery.toLowerCase());
+        setProducts(filteredProducts);
+      } else {
+        // show all products 
+        const allProducts = await getAllProducts('');
+        setProducts(allProducts);
+      }
+    };
+    fetchProducts();
+    
+  }, [searchQuery]);
+  
   return (
     <div>
       <Navbar />

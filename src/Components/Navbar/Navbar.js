@@ -1,10 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { SearchContext } from '../../SearchContext.js';
 import { useNavigate } from "react-router-dom";
 import { checkUser, logoutUser } from "../../Common/Services/Auth/AuthService.js";
 
 const Navbar = () => {
+
+  const { setSearchQuery } = useContext(SearchContext);
+  const [localSearch, setLocalSearch] = useState('');
+
   const navigate = useNavigate();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setSearchQuery(localSearch);
+  }
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -37,8 +47,8 @@ const Navbar = () => {
 
           {/* Search Bar */}
           <div className="flex-grow mx-4">
-            <form className="flex w-full items-center border rounded-lg overflow-hidden">
-              <input type="text" className="flex-grow px-4 py-2" placeholder="Search" aria-label="Search" />
+            <form className="flex w-full items-center border rounded-lg overflow-hidden" onSubmit={handleSubmit}>
+              <input type="text" className="flex-grow px-4 py-2" placeholder="Search" aria-label="Search" value={localSearch} onChange={(e) => setLocalSearch(e.target.value)} />
               <button type="submit" className="px-4 bg-blue-500 text-white">
                 Search
               </button>
