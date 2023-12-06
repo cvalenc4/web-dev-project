@@ -26,6 +26,7 @@ const CartSummary = () => {
         });
 
         const responseBody = await response.text(); // Get response body as text
+        console.log(responseBody);
         const data = JSON.parse(responseBody); // Parse the response as JSON
         window.location.href = data.url; // Redirect to Stripe Checkout
     } catch (error) {
