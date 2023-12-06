@@ -23,7 +23,7 @@ app.post('/create-checkout-session', async (req, res) => {
             const query = new Parse.Query(Product);
             query.equalTo("objectId", productPointer);
             const product = await query.first(); 
-            const stripePrice = parseInt(product.get('actual_price').replace(/[^0-9]/g, '')) * 100;
+            const stripePrice = parseFloat(product.get('actual_price')) * 100;
             return {
                 price_data: {
                     currency: 'usd',

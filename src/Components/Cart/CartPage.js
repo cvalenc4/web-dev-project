@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { fetchActiveCart, removeFromCart, increaseQuantity, decreaseQuantity } from '../../Common/Services/cartServices';
 import { getCurrentUser } from '../../Common/Services/Auth/AuthService';
-import Navbar from '../Navbar/Navbar.js';
+import NavbarHome from '../Navbar/NavbarHome.js';
 
 const CartSummary = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -57,7 +57,7 @@ const CartSummary = () => {
   
   return (
     <div class="bg-gray-100 min-h-screen">
-        <Navbar />
+        <NavbarHome />
         <div className="container mx-auto p-4">
             <h1 className="text-2xl font-bold mb-4">Cart Summary</h1>
             {cartItems.map((item, index) => (

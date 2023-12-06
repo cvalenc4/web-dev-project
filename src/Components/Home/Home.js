@@ -1,10 +1,10 @@
 import { useNavigate } from "react-router-dom";
-import Navbar from '../Navbar/Navbar.js';
+import NavbarHome from '../Navbar/NavbarHome.js';
 
 const Home = () => {
     return (
         <div className="flex flex-col h-screen overflow-hidden">
-          <Navbar className="z-50" />
+          <NavbarHome className="z-50" />
           <div className="flex-grow relative bg-no-repeat bg-cover bg-center" style={{ backgroundImage: 'url(https://www.corporatevision-news.com/wp-content/uploads/2021/04/ecommerce.jpg)'
  }}>
             <div className="absolute inset-0 bg-black bg-opacity-50" />
