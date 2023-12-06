@@ -25,7 +25,7 @@ const ProductCard = ({ product }) => {
 
   return (
     <div className="border border-gray-300 shadow-lg rounded-lg overflow-hidden flex flex-col relative bg-white">
-      <div className="flex justify-center items-center h-64">
+      <div className="flex justify-center items-center h-64 p-3">
         <img
           src={product.image}
           alt={product.name}

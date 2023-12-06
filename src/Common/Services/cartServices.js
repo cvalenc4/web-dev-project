@@ -1,5 +1,4 @@
 import Parse from 'parse';
-// This is not currently implemented in a component, but we plan to make it a working feature in the future.
 
 // Fetch the current user's active shopping cart
 export const fetchActiveCart = (user) => {
@@ -122,7 +121,7 @@ export const updateCartItemQuantity = (user, itemId, change) => {
     let newQuantity = itemToUpdate.get("quantity") + change;
     if (newQuantity <= 0) {
       // Prevent decreasing quantity below 1
-      return cart; // Return the cart as is
+      return cart; 
     } else {
       // Update the quantity and save the cart
       itemToUpdate.set("quantity", newQuantity);
