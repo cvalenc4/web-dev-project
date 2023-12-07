@@ -36,7 +36,7 @@ const ProductCard = ({ product }) => {
         <div>
           <h3 className="text-lg font-semibold text-gray-800">{product.name}</h3>
         </div>
-        <p className="text-gray-600 self-start mt-2">{product.actual_price}</p>
+        <p className="text-gray-600 self-start mt-2">${product.actual_price}</p>
       </div>
       <button onClick={handleAddToCart} className="absolute bottom-2 right-2 bg-blue-500 text-white text-sm px-3 py-2 rounded hover:bg-blue-600">
         Add to Cart

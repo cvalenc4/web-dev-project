@@ -63,23 +63,23 @@ const CartSummary = () => {
             <h1 className="text-2xl font-bold mb-4">Cart Summary</h1>
             {cartItems.map((item, index) => (
                 <div key={index} className="flex items-center bg-white p-4 rounded-lg shadow-md mb-3">
-                <img src={item.get('product').get('image')} alt={item.get('product').get('name')} className="w-20 h-20 object-contain mr-4" />
-                <div className="flex-grow">
-                    <p className="font-semibold">{item.get('product').get('name')}</p>
-                    <div className="flex items-center mt-2">
-                    <button onClick={() => handleDecreaseQuantity(item.id)} className="px-2 py-1 border rounded-l-md">
-                        -
-                    </button>
-                    <input type="text" value={item.get('quantity')} readOnly className="w-12 text-center border-t border-b" />
-                    <button onClick={() => handleIncreaseQuantity(item.id)} className="px-2 py-1 border rounded-r-md">
-                        +
-                    </button>
-                    </div>
-                    <p className="text-right mt-2">Total Price: ${item.get('quantity') * priceToNumber(item.get('product').get('actual_price'))}</p>
-                </div>
-                <button onClick={() => handleRemoveItem(item.id)} className="ml-4">
-                    <img src="https://icons-for-free.com/iconfiles/png/512/trash+bin+icon-1320086460670911435.png" alt="Remove" className="w-6 h-6" />
-                </button>
+                  <img src={item.get('product').get('image')} alt={item.get('product').get('name')} className="w-20 h-20 object-contain mr-4" />
+                  <div className="flex-grow">
+                      <p className="font-semibold">{item.get('product').get('name')}</p>
+                      <div className="flex items-center mt-2">
+                      <button onClick={() => handleDecreaseQuantity(item.id)} className="px-2 py-1 border rounded-l-md">
+                          -
+                      </button>
+                      <input type="text" value={item.get('quantity')} readOnly className="w-12 text-center border-t border-b" />
+                      <button onClick={() => handleIncreaseQuantity(item.id)} className="px-2 py-1 border rounded-r-md">
+                          +
+                      </button>
+                      </div>
+                      <p className="text-right mt-2">Total Price: ${item.get('quantity') * priceToNumber(item.get('product').get('actual_price'))}</p>
+                  </div>
+                  <button onClick={() => handleRemoveItem(item.id)} className="ml-4">
+                      <img src="https://icons-for-free.com/iconfiles/png/512/trash+bin+icon-1320086460670911435.png" alt="Remove" className="w-6 h-6" />
+                  </button>
                 </div>
             ))}
             <button onClick={handleCheckout} className="w-full py-2 px-4 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-600">

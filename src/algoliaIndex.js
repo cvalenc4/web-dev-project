@@ -3,7 +3,7 @@ import * as Env from "./environments.js";
 
 const algoliasearch = require('algoliasearch');
 const client = algoliasearch(Env.ALGOLIA_APP_ID, Env.ALGOLIA_API_KEY);
-const index = client.initIndex('products');
+const index = client.initIndex('realProducts');
 
 // import existing data from parse app to algolia
 const indexData = () => {
