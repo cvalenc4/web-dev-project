@@ -16,7 +16,6 @@ export const fetchActiveCart = (user) => {
         newCart.set("user", user);
         newCart.set("status", "Active");
         newCart.set("items", []);
-        console.log('newCart: ', newCart);
         return newCart.save().then(savedCart => {
           return savedCart;
         })

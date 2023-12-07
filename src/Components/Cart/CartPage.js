@@ -80,6 +80,7 @@ const CartSummary = () => {
                   <button onClick={() => handleRemoveItem(item.id)} className="ml-4">
                       <img src="https://icons-for-free.com/iconfiles/png/512/trash+bin+icon-1320086460670911435.png" alt="Remove" className="w-6 h-6" />
                   </button>
+
                 </div>
             ))}
             <button onClick={handleCheckout} className="w-full py-2 px-4 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-600">
