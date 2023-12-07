@@ -86,11 +86,11 @@ const CartSummary = () => {
                   <div className="flex-grow">
                       <p className="font-semibold">{item.get('product').get('name')}</p>
                       <div className="flex items-center mt-2">
-                      <button onClick={() => handleDecreaseQuantity(item.id)} className="px-2 py-1 border rounded-l-md">
+                      <button onClick={() => handleDecreaseQuantity(item.id)} className="px-2 py-1 border rounded-l-md text-lg h-8 w-8 flex items-center justify-center">
                           -
                       </button>
-                      <input type="text" value={item.get('quantity')} readOnly className="w-12 text-center border-t border-b" />
-                      <button onClick={() => handleIncreaseQuantity(item.id)} className="px-2 py-1 border rounded-r-md">
+                      <input type="text" value={item.get('quantity')} readOnly className="w-12 text-center border-t border-b h-8" />
+                      <button onClick={() => handleIncreaseQuantity(item.id)} className="px-2 py-1 border rounded-r-md text-lg h-8 w-8 flex items-center justify-center">
                           +
                       </button>
                       </div>
