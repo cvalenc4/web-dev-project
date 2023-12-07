@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { checkUser, logoutUser } from "../../Common/Services/Auth/AuthService.js";
 
 const Navbar = () => {
-
   const { setSearchQuery } = useContext(SearchContext);
   const [localSearch, setLocalSearch] = useState('');
 
@@ -28,7 +27,7 @@ const Navbar = () => {
     if (test) {
       logoutUser().then((isLoggedOut) => {
         if (isLoggedOut) {
-          navigate('/auth/login');
+          navigate('/auth/login', { replace: true, state: { forced: true }});
         }
       });
     } else {
@@ -42,15 +41,18 @@ const Navbar = () => {
         <div className="relative flex h-16 items-center justify-between">
           {/* Logo */}
           <div className="flex items-center">
-            <img className="h-8 w-auto" src="/path/to/logo.png" alt="Logo" />
+            <img className="h-8 w-auto" src="/tsLogo.png" alt="Logo" />
           </div>
 
           {/* Search Bar */}
           <div className="flex-grow mx-4">
             <form className="flex w-full items-center border rounded-lg overflow-hidden" onSubmit={handleSubmit}>
-              <input type="text" className="flex-grow px-4 py-2" placeholder="Search" aria-label="Search" value={localSearch} onChange={(e) => setLocalSearch(e.target.value)} />
-              <button type="submit" className="px-4 bg-blue-500 text-white">
-                Search
+              <input type="text" className="flex-grow focus:outline-none px-4 py-2" placeholder="Search" aria-label="Search" value={localSearch} onChange={(e) => setLocalSearch(e.target.value)} />
+              <button type="submit" className="px-4 text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="h-6 w-6">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M10 4a6 6 0 100 12 6 6 0 000-12z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.2-5.2" />
+                </svg>
               </button>
             </form>
           </div>

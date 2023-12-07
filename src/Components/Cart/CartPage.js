@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { fetchActiveCart, removeFromCart, increaseQuantity, decreaseQuantity } from '../../Common/Services/cartServices';
 import { getCurrentUser } from '../../Common/Services/Auth/AuthService';
 import NavbarHome from '../Navbar/NavbarHome.js';
@@ -6,6 +7,7 @@ import NavbarHome from '../Navbar/NavbarHome.js';
 const CartSummary = () => {
   const [cartItems, setCartItems] = useState([]);
   const user = getCurrentUser();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (user) {
@@ -56,11 +58,28 @@ const CartSummary = () => {
     return parseFloat(price.replace(/[^\d.-]/g, ''));
   }
   
+  const totalPrice = cartItems.reduce((total, item) => {
+    return total + item.get('quantity') * priceToNumber(item.get('product').get('actual_price'));
+  }, 0);
+
   return (
     <div class="bg-gray-100 min-h-screen">
         <NavbarHome />
         <div className="container mx-auto p-4">
-            <h1 className="text-2xl font-bold mb-4">Cart Summary</h1>
+          <div className="flex items-center justify-between">
+            <button 
+              onClick={() => navigate('/shop')} 
+              className="mb-4 inline-flex items-center text-black hover:text-gray-700"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+              </svg>
+              Back to Shop
+            </button>
+            <div className="flex justify-center">
+              <h1 className="text-2xl font-bold mb-4">Cart Summary</h1>
+            </div>
+          </div>
             {cartItems.map((item, index) => (
                 <div key={index} className="flex items-center bg-white p-4 rounded-lg shadow-md mb-3">
                   <img src={item.get('product').get('image')} alt={item.get('product').get('name')} className="w-20 h-20 object-contain mr-4" />
@@ -75,7 +94,7 @@ const CartSummary = () => {
                           +
                       </button>
                       </div>
-                      <p className="text-right mt-2">Total Price: ${item.get('quantity') * priceToNumber(item.get('product').get('actual_price'))}</p>
+                      <p className="text-right mt-2">Price: ${item.get('quantity') * priceToNumber(item.get('product').get('actual_price'))}</p>
                   </div>
                   <button onClick={() => handleRemoveItem(item.id)} className="ml-4">
                       <img src="https://icons-for-free.com/iconfiles/png/512/trash+bin+icon-1320086460670911435.png" alt="Remove" className="w-6 h-6" />
@@ -83,7 +102,10 @@ const CartSummary = () => {
 
                 </div>
             ))}
-            <button onClick={handleCheckout} className="w-full py-2 px-4 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-600">
+            <div className="text-right font-bold mt-4">
+              Total Price: ${totalPrice.toFixed(2)}
+            </div>
+            <button onClick={handleCheckout} className="w-full py-2 px-4 bg-gray-600 text-white rounded-lg shadow-md hover:bg-gray-800">
               Checkout
             </button>
         </div>
