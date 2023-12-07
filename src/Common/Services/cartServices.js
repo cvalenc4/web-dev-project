@@ -48,6 +48,7 @@ export const addToCart = (user, product, quantity) => {
 
     // Add new item if it doesn't exist
     if (!itemExists) {
+      console.log('here')
         const Product = Parse.Object.extend("Products");
         const query = new Parse.Query(Product);
         query.equalTo("objectId", product.objectID);
@@ -65,13 +66,13 @@ export const addToCart = (user, product, quantity) => {
           cart.set("items", items);
           return cart.save();
         });
-    } else { 
-      cart.set("items", items);
-      return cart.save();
+    } else {
+        cart.set("items", items);
+        return cart.save();
     }
   }).then(savedCart => {
-    console.log("Cart updated: ", savedCart);
-    return savedCart;
+      console.log("Item added to cart: ", savedCart);
+      return savedCart;
   }).catch(error => {
       console.error("Error adding to cart: ", error);
       throw error;

@@ -1,16 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate } from "react-router-dom";
 import { checkUser, logoutUser } from "../../Common/Services/Auth/AuthService.js";
 
 const Navbar = () => {
     const navigate = useNavigate();
-    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const test = checkUser();
-  
-    const toggleDropdown = () => {
-      setIsDropdownOpen(!isDropdownOpen);
-    };
-  
+
     const handleCartClick = () => {
       if (!checkUser()) {
         navigate('/auth/login');
@@ -23,20 +18,12 @@ const Navbar = () => {
       if (test) {
         logoutUser().then((isLoggedOut) => {
           if (isLoggedOut) {
-            navigate('/auth/login');
+            navigate('/auth/login', { replace: true, state: { forced: true }});
           }
         });
-      } else {
+      } else {    
         navigate('/auth/login');
       }
-    };
-  
-    const handleSignOut = () => {
-      logoutUser().then((isLoggedOut) => {
-        if (isLoggedOut === false) {
-          navigate('/auth/login', { replace: true });
-        }
-      });
     };
   
     return (
@@ -45,7 +32,8 @@ const Navbar = () => {
           <div className="relative flex h-16 items-center justify-between">
             {/* Logo */}
             <div className="flex items-center">
-              <img className="h-8 w-auto" src="/path/to/logo.png" alt="Logo" />
+              {/* add tsLogo */}
+              <img className="h-8 w-auto" src="/tsLogo.png" alt="Logo" /> 
             </div>
 
             {/* Navigation Links and User Profile */}
