@@ -44,24 +44,34 @@ export const addToCart = (user, product, quantity) => {
             item.set("quantity", updatedQuantity);
         }
         return item;
-    });
+    });  
 
     // Add new item if it doesn't exist
     if (!itemExists) {
-        const CartItem = Parse.Object.extend("CartItem");
-        const cartItem = new CartItem();
-        cartItem.set("product", product);
-        cartItem.set("quantity", quantity);
-        cartItem.set("cart", cart); // Associate cartItem with the ShoppingCart
-        items.push(cartItem);
+        const Product = Parse.Object.extend("Products");
+        const query = new Parse.Query(Product);
+        query.equalTo("objectId", product.objectID);
+        return query.first().then((productResult) => {
+          if (!productResult) {
+            throw new Error('Product not found');
+          }
+          const CartItem = Parse.Object.extend("CartItem");
+          const cartItem = new CartItem();
+          cartItem.set("product", productResult); // Set the product pointer
+          cartItem.set("quantity", quantity);
+          cartItem.set("cart", cart); // Associate cartItem with the ShoppingCart
+          items.push(cartItem);
+
+          cart.set("items", items);
+          return cart.save();
+        });
+    } else { 
+      cart.set("items", items);
+      return cart.save();
     }
-
-    cart.set("items", items);
-
-    return cart.save().then(savedCart => {
-        console.log("Cart updated: ", savedCart);
-        return savedCart;
-    });
+  }).then(savedCart => {
+    console.log("Cart updated: ", savedCart);
+    return savedCart;
   }).catch(error => {
       console.error("Error adding to cart: ", error);
       throw error;

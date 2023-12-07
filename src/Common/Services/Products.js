@@ -1,13 +1,9 @@
-import Parse from "parse";
+import index from '../../algoliaIndex.js';
 
-// this is used to get the products from our database 
-export const getAllProducts = () => {
-  const Products = Parse.Object.extend("Products");
-  const query = new Parse.Query(Products);
-
-  return query.find().then((results) => {
-    return results.map((result) => {
-      return result;
-    });
+export const getAllProducts = (searchInput) => {
+  return index.search(searchInput, {
+    hitsPerPage: 100
+  }).then(({ hits }) => {
+    return hits;
   });
 };
