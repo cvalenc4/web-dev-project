@@ -1,3 +1,6 @@
+# Running Code:
+Will need to have two terminals with one inside the server folder and the other inside the root folder. You can run npm start in both to run the backend and the frontend servers.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
