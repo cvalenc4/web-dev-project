@@ -6,15 +6,14 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-Parse.serverURL = 'https://parseapi.back4app.com'; // This is your Server URL
-// Remember to inform BOTH the Back4App Application ID AND the JavaScript KEY
+Parse.serverURL = 'https://parseapi.back4app.com'; 
 Parse.initialize(
-  '8s5HtEE4TCs3Eai05y0lHPMlL7kBPP1daPu9pL5i', // This is your Application ID
-  'J5IkXss5RKPsBqaM6lzHJxFmgMtbB2NWOqVxHJ58' // This is your Javascript key
+  '8s5HtEE4TCs3Eai05y0lHPMlL7kBPP1daPu9pL5i', 
+  'J5IkXss5RKPsBqaM6lzHJxFmgMtbB2NWOqVxHJ58' 
 );
 
 app.post('/create-checkout-session', async (req, res) => {
-    const { items } = req.body; // Your frontend will send the cart items here
+    const { items } = req.body; 
     
     try {
         const lineItems = await Promise.all(items.map(async (cartItem) => {
@@ -30,7 +29,6 @@ app.post('/create-checkout-session', async (req, res) => {
                     unit_amount: stripePrice, 
                     product_data: {
                         name: product.get('name'),
-                        // Add more product details here if needed
                     },
                 },
                 quantity: cartItem.quantity,
